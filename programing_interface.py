@@ -1,10 +1,10 @@
 from tkinter import *
 
 #colors
-bg = ("#424242")
-fg = ("#e5e5e5")
-button_bg = ("#46664f")
-button_fg = ("#e5e5e5")
+bg = "#424242"
+fg = "#e5e5e5"
+button_bg = "#46664f"
+button_fg = "#e5e5e5"
 
 class Root(Tk):
     def __init__(self, *args, **kwords):
@@ -28,10 +28,15 @@ class window(Frame):
     def __init__(self, root, *args, **kwords):
         super().__init__(root, *args, **kwords)
         self.menubar = Menu(root)
+        self.menubar.add_command(label="Hello!", command=lambda : print("Hello!"))
+        self.menubar.add_command(label="Quit!")
+
+    def show(self):
+        root.config(menu=self.menubar)
 
 
 
-class code_interpreter(Frame):
+class code_interpreter(window):
     def _submit(self, text):
         print(text.get("1.0",END)) #prints "text"
 
@@ -45,11 +50,8 @@ class code_interpreter(Frame):
 
 
     def show(self):
-        menubar = Menu(root)
-        menubar.add_command(label="Hello!", command=lambda : print("Hello!"))
-        menubar.add_command(label="Quit!")
+        super().show()
 
-        root.config(menu=menubar)
         self.label.pack(fill=BOTH)
         self.submit.pack(fill=X)
         self.main.pack(fill=BOTH, expand=True)
@@ -57,14 +59,16 @@ class code_interpreter(Frame):
 
 
 
+if __name__ == "__main__":
+    root = Root()
 
+    def loop():
+        root.after(1000, loop)
 
-root = Root()
-root.bind("<F11>", lambda x : root.attributes("-fullscreen", True))
+    root.bind("<F11>", lambda x : root.attributes("-fullscreen", True))
 
+    window = root.append(code_interpreter(root))
+    window.show()
 
-window = root.append(code_interpreter(root))
-window.show()
-
-
-mainloop()
+    loop()
+    mainloop()
