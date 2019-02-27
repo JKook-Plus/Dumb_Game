@@ -1,5 +1,5 @@
 from tkinter import *
-
+from PIL import Image, ImageTk
 #colors
 bg = "#424242"
 fg = "#e5e5e5"
@@ -49,16 +49,17 @@ class code_interpreter(window):
     def _submit(self, text):
         print(text.get("1.0",END)) #prints "text"
 
-    def __init__(self, root, *args, **kwords):
-        super().__init__(root, *args, **kwords)
-        self.main = Text(root, fg=fg,bg=bg)
-        self.submit = Button(root, text="Submit", fg=button_fg, bg=button_bg, pady=2, borderwidth=0, height=1, command=lambda : self._submit(self.main))
-        self.label = Label(root, fg=fg,bg=bg, text="\n\n\n", height = 3)
-
+    def __init__(self, *args, **kwords):
+        super().__init__(self, *args, **kwords)
+        self.main = Text(self, fg=fg,bg=bg)
+        self.submit = Button(self, text="Submit", fg=button_fg, bg=button_bg, pady=2, borderwidth=0, height=1, command=lambda : self._submit(self.main))
+        self.label = Label(self, fg=fg, bg=bg, text="\n\n\n", height = 3)
+        a = (PhotoImage("adventure-aerial-beautiful-351448.png"))
+        self.image = Label(self, image=(a))
 
     def show(self):
         super().show()
-
+        self.image.pack(fill=BOTH)
         self.label.pack(fill=BOTH)
         self.submit.pack(fill=X)
         self.main.pack(fill=BOTH, expand=True)
