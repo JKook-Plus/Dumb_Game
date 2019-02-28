@@ -49,13 +49,13 @@ class code_interpreter(window):
     def _submit(self, text):
         print(text.get("1.0",END)) #prints "text"
 
-    def __init__(self, *args, **kwords):
-        super().__init__(self, *args, **kwords)
+    def __init__(self, root, *args, **kwords):
+        super().__init__(root, *args, **kwords)
         self.main = Text(self, fg=fg,bg=bg)
         self.submit = Button(self, text="Submit", fg=button_fg, bg=button_bg, pady=2, borderwidth=0, height=1, command=lambda : self._submit(self.main))
         self.label = Label(self, fg=fg, bg=bg, text="\n\n\n", height = 3)
-        a = (PhotoImage("adventure-aerial-beautiful-351448.png"))
-        self.image = Label(self, image=(a))
+        a = (PhotoImage("adventure-aerial-beautiful-351448.gif"))
+        self.image = Label(self, image=a)
 
     def show(self):
         super().show()
